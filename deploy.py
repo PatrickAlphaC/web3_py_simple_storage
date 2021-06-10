@@ -4,6 +4,7 @@ from web3 import Web3
 from solc import compile_standard
 import os
 
+
 with open("./SimpleStorage.sol", "r") as file:
     simple_storage_file = file.read()
 
@@ -40,7 +41,7 @@ abi = json.loads(
 
 # For connecting to ganache
 w3 = Web3(Web3.HTTPProvider("http://0.0.0.0:8545"))
-chaind_id = 1337
+chain_id = 1337
 my_address = "0x94B806BB0e455576ea46193D9DBbB08d1cc57Da9"
 private_key = os.getenv("PRIVATE_KEY")
 
@@ -50,7 +51,7 @@ SimpleStorage = w3.eth.contract(abi=abi, bytecode=bytecode)
 nonce = w3.eth.getTransactionCount(my_address)
 # Submit the transaction that deploys the contract
 transaction = SimpleStorage.constructor().buildTransaction(
-    {"chainId": chaind_id, "from": my_address, "nonce": nonce}
+    {"chainId": chain_id, "from": my_address, "nonce": nonce}
 )
 # Sign the transaction
 signed_txn = w3.eth.account.sign_transaction(transaction, private_key=private_key)
@@ -67,7 +68,7 @@ print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
 simple_storage = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
 print(f"Initial Stored Value {simple_storage.functions.retrieve().call()}")
 greeting_transaction = simple_storage.functions.store(15).buildTransaction(
-    {"chainId": chaind_id, "from": my_address, "nonce": nonce + 1}
+    {"chainId": chain_id, "from": my_address, "nonce": nonce + 1}
 )
 signed_greeting_txn = w3.eth.account.sign_transaction(
     greeting_transaction, private_key=private_key
