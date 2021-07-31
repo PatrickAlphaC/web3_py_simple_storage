@@ -1,8 +1,11 @@
 import json
 
 from web3 import Web3
-from solc import compile_standard
+from solcx import compile_standard
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 with open("./SimpleStorage.sol", "r") as file:
@@ -20,7 +23,8 @@ compiled_sol = compile_standard(
                 }
             }
         },
-    }
+    },
+    solc_version="0.6.0",
 )
 
 with open("compiled_code.json", "w") as file:
@@ -36,13 +40,13 @@ abi = json.loads(
     compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["metadata"]
 )["output"]["abi"]
 
-# w3 = Web3(Web3.HTTPProvider(os.getenv("RINKEBY_RPC_URL")))
-# chain_id = 4
+w3 = Web3(Web3.HTTPProvider(os.getenv("RINKEBY_RPC_URL")))
+chain_id = 4
 
 # For connecting to ganache
-w3 = Web3(Web3.HTTPProvider("http://0.0.0.0:8545"))
-chain_id = 1337
-my_address = "0x94B806BB0e455576ea46193D9DBbB08d1cc57Da9"
+# w3 = Web3(Web3.HTTPProvider("http://0.0.0.0:8545"))
+# chain_id = 1337
+my_address = "0x643315C9Be056cDEA171F4e7b2222a4ddaB9F88D"
 private_key = os.getenv("PRIVATE_KEY")
 
 # Create the contract in Python
