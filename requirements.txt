@@ -1,2 +1,2 @@
-web3
+web3==5.23.1
 py-solc-x
