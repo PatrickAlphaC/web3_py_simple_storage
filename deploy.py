@@ -1,6 +1,7 @@
 import json
 
 from web3 import Web3
+from web3.middleware import geth_poa_middleware
 
 # In the video, we forget to `install_solc`
 # from solcx import compile_standard
@@ -52,6 +53,7 @@ abi = json.loads(
 #
 # For connecting to ganache
 w3 = Web3(Web3.HTTPProvider("http://0.0.0.0:8545"))
+w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 chain_id = 1337
 my_address = "0xdbB4A708755dfD59f9c4b100B2BE23a6d2EB7D57"
 private_key = "ffdd7a010ab8c089d95a9c2ff24e75b21744b5db26c3cd66d14f8e91c46afcc4"
