@@ -53,11 +53,14 @@ abi = json.loads(
 #
 # For connecting to ganache
 w3 = Web3(Web3.HTTPProvider("http://0.0.0.0:8545"))
-w3.middleware_onion.inject(geth_poa_middleware, layer=0)
+chain_id = 1337
+
+if chain_id == 4:
+    w3.middleware_onion.inject(geth_poa_middleware, layer=0)
+    print(w3.clientVersion)
 #Added print statement to ensure connection suceeded as per
 #https://web3py.readthedocs.io/en/stable/middleware.html#geth-style-proof-of-authority
-print(w3.clientVersion)
-chain_id = 1337
+
 my_address = "0x6aABE487828603b6f0a3E1C7DAcF7F42bA42A9B2"
 private_key = "8a63f5a3608d032ba652a323d62f333f71a895d253d6aa9f5defc16a43e4d7f1"
 
