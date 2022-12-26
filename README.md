@@ -8,7 +8,7 @@ cd web3_py_simple_storage
 2. Setup a [local ganache chain](https://www.trufflesuite.com/ganache)
 3. Install requirements
 ```bash
-pip install -r requirements.txt
+pip install -r requirements file
 ```
 4. Set your private keys and address, and adjust this section appropriately:
 ```python
