@@ -48,7 +48,7 @@ abi = json.loads(
     compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["metadata"]
 )["output"]["abi"]
 
-# w3 = Web3(Web3.HTTPProvider(os.getenv("GOERLI_RPC_URL")))
+# w3 = Web3(Web3.HTTPProvider(os.getenv("SEPOLIA_RPC_URL")))
 # chain_id = 4
 #
 # For connecting to ganache
