@@ -67,9 +67,9 @@ private_key = "8a63f5a3608d032ba652a323d62f333f71a895d253d6aa9f5defc16a43e4d7f1"
 # Create the contract in Python
 SimpleStorage = w3.eth.contract(abi=abi, bytecode=bytecode)
 # Get the latest transaction
-nonce = w3.eth.getTransactionCount(my_address)
+nonce = w3.eth.get_transaction_count(my_address)
 # Submit the transaction that deploys the contract
-transaction = SimpleStorage.constructor().buildTransaction(
+transaction = SimpleStorage.constructor().build_transaction(
     {
         "chainId": chain_id,
         "gasPrice": w3.eth.gas_price,
@@ -91,7 +91,7 @@ print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
 # Working with deployed Contracts
 simple_storage = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
 print(f"Initial Stored Value {simple_storage.functions.retrieve().call()}")
-greeting_transaction = simple_storage.functions.store(15).buildTransaction(
+greeting_transaction = simple_storage.functions.store(15).build_transaction(
     {
         "chainId": chain_id,
         "gasPrice": w3.eth.gas_price,
